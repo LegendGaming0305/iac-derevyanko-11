@@ -60,8 +60,7 @@ export VM_IP=$(yc compute instance get "$PREFIX-web-1" --format json \
   | jq -r '.network_interfaces[0].primary_v4_address.one_to_one_nat.address')
 ssh yc-user@"$VM_IP"
 
-sudo apt update
-sudo apt install -y nginx
+sudo apt update && sudo apt install -y nginx
 set +H
 sudo sed -i "s|Welcome to nginx!|devlab on $(hostname)|g" /var/www/html/index.nginx-debian.html
 exit
